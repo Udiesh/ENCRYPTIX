@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Moderustic:wght@300..800&family=Outfit:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="main">
+      <div class="calculator">
+        <div class="display">
+          <input type="text" name="display" id="display" disabled />
+        </div>
+        <div class="buttons">
+          <input type="button" value="AC" class="btn" />
+          <input type="button" value="DE" class="btn" />
+          <input type="button" value="." class="btn" />
+          <input type="button" value="/" class="sign" />
+          <input type="button" value="7" class="btn" />
+          <input type="button" value="8" class="btn" />
+          <input type="button" value="9" class="btn" />
+          <input type="button" value="x" class="sign-x" />
+          <input type="button" value="4" class="btn" />
+          <input type="button" value="5" class="btn" />
+          <input type="button" value="6" class="btn" />
+          <input type="button" value="-" class="sign" />
+          <input type="button" value="1" class="btn" />
+          <input type="button" value="2" class="btn" />
+          <input type="button" value="3" class="btn" />
+          <input type="button" value="+" class="sign" />
+          <input type="button" value="00" class="btn" />
+          <input type="button" value="0" class="btn" />
+          <input type="button" value="=" class="btn equal-btn" />
+        </div>
+      </div>
+    </div>
+    <script>
+      // Get the display and all buttons
+      const display = document.getElementById("display");
+      const buttons = document.querySelectorAll(
+        ".btn, .sign, .sign-x, .equal-btn"
+      );
+
+      // Function to update the display when a button is clicked
+      buttons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const value = e.target.value;
+
+          // Clear the display if 'AC' is clicked
+          if (value === "AC") {
+            display.value = "";
+          }
+          // Delete the last character if 'DE' is clicked
+          else if (value === "DE") {
+            display.value = display.value.slice(0, -1);
+          }
+          // Evaluate the expression if '=' is clicked
+          else if (value === "=") {
+            try {
+              // Replace 'x' with '*' for multiplication and evaluate the expression
+              display.value = eval(display.value.replace(/x/g, "*"));
+            } catch {
+              display.value = "Error";
+            }
+          }
+          // Append the clicked button value to the display
+          else {
+            display.value += value;
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
